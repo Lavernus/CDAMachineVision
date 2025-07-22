@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Side-by-Side Videos</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+      flex-direction: column;
+    }
+    .video-container {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      height: 100%;
+    }
+    video {
+      width: 50%;
+      height: 100%;
+      object-fit: contain;
+    }
+  </style>
+</head>
+<body>
+  <div class="video-container">
+    <video id="vid1" src="original.mp4" controls></video>
+    <video id="vid2" src="timelens_fixed.mp4" controls></video>
+  </div>
+
+  <script>
+    const vid1 = document.getElementById("vid1");
+    const vid2 = document.getElementById("vid2");
+
+    function syncPlay(e) {
+      if (e.target.paused) {
+        vid1.pause();
+        vid2.pause();
+      } else {
+        vid1.play();
+        vid2.play();
+      }
+    }
+
+    vid1.addEventListener('play', syncPlay);
+    vid2.addEventListener('play', syncPlay);
+    vid1.addEventListener('pause', syncPlay);
+    vid2.addEventListener('pause', syncPlay);
+  </script>
+</body>
+</html>
